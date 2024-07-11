@@ -1,9 +1,8 @@
-import sys
 import os
 import win32con
 import win32gui
 
-STARTLIST = ["欢迎来到nfa登录辅助程序", "当前版本号0.0.2", "广告：0.45nfa -> s-y.lol\n", "输入help查看帮助"]  # 开始提示
+STARTLIST = ["欢迎来到nfa登录辅助程序", "当前版本号0.0.3", "广告：0.45nfa -> s-y.lol\n", "输入help查看帮助"]  # 开始提示
 HELPLIST = ["单条nfa：输入到此程序", "多条nfa：输入mult回车，将txt文件拖入此程序", "回车：复制下一项", "stop：退出", "top：窗口置顶/不置顶"]  # 帮助文本
 TopState = 0
 
@@ -42,7 +41,7 @@ while True:  # 命令/输入系统
             print(i)
 
     elif Command == "stop":  # 停止程序
-        sys.exit()
+        exit()
 
     elif Command == "mult":  # txt文件导入
         FilePath = input("将txt拖到此程序：")
