@@ -2,8 +2,8 @@ import os
 import win32con
 import win32gui
 
-STARTLIST = ["欢迎来到nfa登录辅助程序", "当前版本号0.0.3", "广告：0.45nfa -> s-y.lol\n", "输入help查看帮助"]  # 开始提示
-HELPLIST = ["单条nfa：输入到此程序", "多条nfa：输入mult回车，将txt文件拖入此程序", "回车：复制下一项", "stop：退出", "top：窗口置顶/不置顶"]  # 帮助文本
+STARTLIST = ["欢迎来到nfa登录辅助程序", "当前版本号0.0.4", "广告：0.45nfa -> s-y.lol\n", "输入help查看帮助"]  # 开始提示
+HELPLIST = ["单条nfa：输入到此程序", "多条nfa：输入mult回车，将txt文件拖入此程序", "回车：复制下一项", "stop：退出", "top：窗口置顶/不置顶", "cls：清屏"]  # 帮助文本
 TopState = 0
 
 
@@ -23,11 +23,9 @@ def copynfa(element):  # 主要程序
         nfa = nfalist[0]
     nfalist = nfa.split(":")
     os.system("echo " + nfalist[0] + "| clip")
-    print("已自动复制账号，回车复制密码")
-    input()
+    input("[提示]已自动复制账号，回车复制密码")
     os.system("echo " + nfalist[1] + "| clip")
-    print("已复制密码，回车开始下一项")
-    input()
+    input("[提示]已复制密码，回车开始下一项")
 
 
 for i in STARTLIST:  # 开始提示打印
@@ -44,7 +42,7 @@ while True:  # 命令/输入系统
         exit()
 
     elif Command == "mult":  # txt文件导入
-        FilePath = input("将txt拖到此程序：")
+        FilePath = input("[提示]将txt拖到此程序：")
         ReadFile = open(FilePath, "r")
         ReadList = ReadFile.readlines()
         ReadFile.close()
@@ -55,11 +53,17 @@ while True:  # 命令/输入系统
     elif Command == "top":  # 切换置顶
         if TopState == 0:
             TopState = 1
-            print("已置顶")
+            print("[命令]已置顶")
         else:
             TopState = 0
-            print("已取消置顶")
+            print("[命令]已取消置顶")
         top_window(TopState)
 
+    elif Command == "cls":  # 清屏
+        os.system("cls")
+
     else:  # 单条nfa
-        copynfa(Command)
+        if ":" in Command:
+            copynfa(Command)
+        else:
+            print("[错误]未知命令或NFA格式错误")
